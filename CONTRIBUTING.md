@@ -1,17 +1,32 @@
-# Getting Involved
+# Contributing
 
-Thanks for your interest in the project, we'd love to have you involved! Check out the sections below to find out more about what to do next...
+Contributions are **welcome** and will be fully **credited**.
 
-## Opening an Issue
+We accept contributions via Pull Requests on [Github](https://github.com/Beachcasts/s3-log-analyzer).
 
-We always welcome issues, if you've seen something that isn't quite right or you have a suggestion for a new feature, please go ahead and open an issue in this project. Include as much information as you have, it really helps.
 
-## Making a Code Change
+## Pull Requests
 
-We're always open to pull requests, but these should be small and clearly described so that we can understand what you're trying to do. Feel free to open an issue first and get some discussion going.
+- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - Check the code style with ``$ composer check-style`` and fix it with ``$ composer fix-style``.
 
-When you're ready to start coding, fork this repository to your own GitHub account and make your changes in a new branch. Once you're happy (see below for information on how to run the tests), open a pull request and explain what the change is and why you think we should include it in our project.
+- **Add tests!** - Your patch won't be accepted if it doesn't have tests.
 
-## Project Standards
+- **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
 
-Coming
+- **Consider our release cycle** - We try to follow [SemVer v2.0.0](http://semver.org/). Randomly breaking public APIs is not an option.
+
+- **Create feature branches** - Don't ask us to pull from your master branch.
+
+- **One pull request per feature** - If you want to do more than one thing, send multiple pull requests.
+
+- **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please [squash them](http://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages) before submitting.
+
+
+## Running Tests
+
+``` bash
+$ composer test
+```
+
+
+**Happy coding**!
