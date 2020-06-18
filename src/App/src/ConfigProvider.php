@@ -36,6 +36,11 @@ class ConfigProvider
             ],
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                Handler\LogsHandler::class => Handler\LogsHandlerFactory::class,
+                Handler\LogsFetchHandler::class => Handler\LogsFetchHandlerFactory::class,
+                Handler\StatsHandler::class => Handler\StatsHandlerFactory::class,
+                Handler\StatsViewHandler::class => Handler\StatsViewHandlerFactory::class,
+                Handler\StatsFileViewHandler::class => Handler\StatsFileViewHandlerFactory::class,
             ],
         ];
     }

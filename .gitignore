@@ -1,3 +1,4 @@
 /vendor/
 .serverless
 /phpunit.xml
+.env

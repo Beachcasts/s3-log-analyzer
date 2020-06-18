@@ -31,8 +31,17 @@ use Psr\Container\ContainerInterface;
  *     Mezzio\Router\Route::HTTP_METHOD_ANY,
  *     'contact'
  * );
+ * @param Application $app
+ * @param MiddlewareFactory $factory
+ * @param ContainerInterface $container
  */
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
     $app->get('/', App\Handler\HomePageHandler::class, 'home');
     $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
+    $app->get('/logs', App\Handler\LogsHandler::class, 'logs');
+    $app->get('/logs-fetch', App\Handler\LogsFetchHandler::class, 'logs-fetch');
+    $app->get('/stats', App\Handler\StatsHandler::class, 'stats');
+    $app->get('/stats-view', App\Handler\StatsViewHandler::class, 'stats-view');
+    $app->get('/stats-file-view/{filename}', App\Handler\StatsFileViewHandler::class, 'stats-file-view');
+//    $app->get('/stats-file-view/{filename:([a-zA-Z0-9\s_\\.\-\(\):])+(.mp3)$}', App\Handler\StatsFileViewHandler::class, 'stats-file-view');
 };

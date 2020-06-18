@@ -1,0 +1,19 @@
+<?php $this->layout('layout::default', ['title' => 'Logs-Fetch']) ?>
+
+Welcome to the logs-fetch page.
+
+<?php if ($this->data['contents'] == 'success'): ?>
+
+    <h3>Imported <strong>"<?php echo $this->data['processed']; ?>"</strong> Logs Successful!</h3>
+
+    <a class="btn btn-primary" href="/stats-view" title="View Statistics">View StatisticsView Statistics</a>
+
+<?php endif; ?>
+
+<?php if ($this->data['contents'] == 'failed'): ?>
+
+    <h3>No new logs to import!</h3>
+
+    <a class="btn btn-primary" href="/stats-view" title="View Statistics">View Statistics</a>
+
+<?php endif; ?>

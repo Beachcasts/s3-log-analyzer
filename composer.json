@@ -51,7 +51,8 @@
         "mezzio/mezzio": "^3.2.1",
         "mezzio/mezzio-fastroute": "^3.0.3",
         "mezzio/mezzio-helpers": "^5.3",
-        "mezzio/mezzio-platesrenderer": "^2.2"
+        "mezzio/mezzio-platesrenderer": "^2.2",
+        "vlucas/phpdotenv": "^5.0"
     },
     "require-dev": {
         "laminas/laminas-development-mode": "^3.2",
