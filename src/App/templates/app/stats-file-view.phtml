@@ -1,0 +1,58 @@
+<?php $this->layout('layout::default', ['title' => 'Stats File View']) ?>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load('visualization', '1.1', {packages: ['line']});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Dates');
+        data.addColumn('number', 'Downloads');
+        data.addColumn('number', 'Unique Downloads');
+
+        data.addRows([
+            <?php
+            $i = 0;
+            while ($log = $this->data['logs']->fetch()) {
+                if ($i == 0) {
+                    $newDate = strtotime($log['date'] . ' - 1 day');
+                    echo "[new Date(" . date('Y', $newDate) . "," . (date('m', $newDate)-1) . "," . date('d', $newDate) . "), 0, 0],\n";
+                }
+
+                while ($logUnique = $this->data['logsUnique']->fetch()) {
+//                foreach ($logsUnique as $logUnique) {
+                    $unique = 0;
+                    if ($logUnique['date'] == $log['date']) {
+                        $unique = $logUnique['unique_downloads'];
+                        break;
+                    }
+                }
+
+                echo "[new Date(" . substr($log['date'],0,4) . "," . (substr($log['date'],5,2)-1) . "," . substr($log['date'],8,2) . "), " . $log['downloads'] . ", " . $unique . "],\n";
+
+                $i++;
+            }
+            ?>
+        ]);
+
+        var options = {
+            chart: {
+                title: 'Downloads For File: <?php echo htmlentities($this->data['filename']); ?>',
+                subtitle: 'Count all downloads for specific file by day',
+                legend: 'none'
+            },
+            width: 900,
+            height: 500,
+            hAxis: {title: 'Date', format: 'MMM yy'},
+            vAxis: {title: 'Downloads'}
+        };
+
+        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+<div id="linechart_material"></div>

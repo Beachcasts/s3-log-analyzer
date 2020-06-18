@@ -1,0 +1,77 @@
+<?php $this->layout('layout::default', ['title' => 'Stats View']) ?>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load('visualization', '1.1', {packages: ['line']});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'All Downloads');
+
+        data.addRows([
+            <?php
+            $i = 0;
+            while ($log = $this->data['logs']->fetch()) {
+                if ($i == 0) {
+                    $newDate = strtotime($log['date'] . ' - 1 day');
+                    echo "[new Date(" . date('Y', $newDate) . "," . (date('m', $newDate)-1) . "," . date('d', $newDate) . "), 0],\n";
+                }
+                echo "[new Date(" . substr($log['date'],0,4) . "," . (substr($log['date'],5,2)-1) . "," . substr($log['date'],8,2) . "), " . $log['downloads'] . "],\n";
+
+                $i++;
+            }
+            ?>
+        ]);
+
+        var options = {
+            chart: {
+                title: 'Total Downloads All Files',
+                subtitle: 'Count includes all files by day',
+                legend: 'none'
+            },
+            width: 900,
+            height: 500,
+            hAxis: {title: 'Date', format: 'MMM yy'},
+            vAxis: {title: 'Downloads'}
+        };
+
+        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+<div id="linechart_material"></div>
+
+<div>
+    Listing of files included in numbers above: (click filename to view stats for individual file)<br><br>
+
+    <table id="stats">
+        <tr>
+            <th>Filename</th>
+            <th>Total Downloads</th>
+        </tr>
+        <?php while ($file = $this->data['files']->fetch()) { ?>
+            <tr>
+                <td><a href="/stats-file-view/<?php echo str_replace('.mp3', '', $file['file']); ?>"><?php echo $file['file']; ?></a></td>
+                <td><?php echo $file['downloads']; ?></td>
+            </tr>
+        <?php } ?>
+    </table>
+    <br><br>
+    <table id="stats">
+        <tr>
+            <th>Filename</th>
+            <th>Unique Requests</th>
+        </tr>
+        <?php while ($fileUnique = $this->data['filesUnique']->fetch()) { ?>
+            <tr>
+                <td><a href="/stats-file-view/<?php echo str_replace('.mp3', '', $fileUnique['file']); ?>"><?php echo $fileUnique['file']; ?></a></td>
+                <td><?php echo $fileUnique['downloads']; ?></td>
+            </tr>
+        <?php } ?>
+    </table>
+</div>
