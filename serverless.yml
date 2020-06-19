@@ -10,7 +10,7 @@ provider:
               - s3:PutObject
               - s3:GetObject
               - s3:DeleteObject
-          Resource: 'arn:aws:s3:::stats-bucket/*'
+          Resource: 'arn:aws:s3:::<stats-bucket>/*'
 
 plugins:
     - ./vendor/bref/bref
@@ -18,7 +18,7 @@ plugins:
 functions:
     s3loganalyzer:
         handler: public/index.php
-        description: 'This function parses S3 logs, stored in DB, and displays stats.'
+        description: 'This function parses S3 logs, stores in DB, and displays stats.'
         timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
         layers:
             - ${bref:layer.php-74-fpm}

@@ -1,0 +1,11 @@
+<?php
+
+return [
+    'db' => [
+        'dbname' => 'dbname',
+        'user' => 'username',
+        'password' => 'password',
+        'host' => 'localhost',
+        'driver' => 'pdo_mysql'
+    ],
+];
