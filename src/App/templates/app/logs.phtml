@@ -1,5 +1,6 @@
 <?php $this->layout('layout::default', ['title' => 'Logs']) ?>
 
-Welcome to the logs page.
+<h2>Welcome to the logs page.</h2>
 
+Clicking the button to fetch logs will retrieve the logs, store them in the database, then remove the logs from S3. This cannot be undone!<br />
 <a class="btn btn-primary" href="/logs-fetch" title="Fetch Logs">Fetch Logs</a>
